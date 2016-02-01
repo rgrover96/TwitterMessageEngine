@@ -17,4 +17,12 @@ public class TweetParserTest {
 		assertEquals(parser.isMention("franky"), true);
 		assertEquals(parser.isMention("rohan"), false);
 	}
+	
+	@Test
+	public void numberOfMentions() {
+		String tweetMsg = "@franky @rohan @naveen goes to #hollywood. See http://cnn.com";
+		TweetParser parser = new TweetParser(tweetMsg);
+		assertEquals(parser.numberOfMentions(), 3);
+
+	}
 }

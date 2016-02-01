@@ -1,5 +1,7 @@
 package parser;
 
+import Util.URLUtil;
+
 public class TweetParser {
 
 	private String tweetMessage = null;
@@ -29,4 +31,28 @@ public class TweetParser {
 		}
 		return count;
 	}
+
+	public boolean isTopic(String topic) {
+		String[] words = tweetMessage.split(" ");
+		for (String word : words) {
+			if (word.startsWith("#")) {
+				if (word.contains(topic))
+					return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean isReferencedURL(String url) {
+		String[] words = tweetMessage.split(" ");
+		for (String word : words) {
+			if(URLUtil.isURLValid(word)) {
+				if(URLUtil.compareURL(word, url)) {
+					return true;
+				}
+			}
+		}
+		return false; 
+	}
 }
+	

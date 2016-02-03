@@ -43,16 +43,26 @@ public class TweetParser {
 		return false;
 	}
 
+	public int numberOfTopics() {
+		int count = 0;
+		String[] words = tweetMessage.split(" ");
+		for (String word : words) {
+			if (word.startsWith("#")) {
+				count++;
+			}
+		}
+		return count;
+	}
+
 	public boolean isReferencedURL(String url) {
 		String[] words = tweetMessage.split(" ");
 		for (String word : words) {
-			if(URLUtil.isURLValid(word)) {
-				if(URLUtil.compareURL(word, url)) {
+			if (URLUtil.isURLValid(word)) {
+				if (URLUtil.compareURL(word, url)) {
 					return true;
 				}
 			}
 		}
-		return false; 
+		return false;
 	}
 }
-	

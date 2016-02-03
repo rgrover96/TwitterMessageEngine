@@ -4,12 +4,10 @@ import org.junit.Test;
 
 import parser.TweetParser;
 
-
 import static org.junit.Assert.*;
 
-
 public class TweetParserTest {
-	
+
 	@Test
 	public void isMentionTest() {
 		String tweetMsg = "@franky goes to #hollywood. See http://cnn.com";
@@ -17,14 +15,17 @@ public class TweetParserTest {
 		assertEquals(parser.isMention("franky"), true);
 		assertEquals(parser.isMention("rohan"), false);
 	}
-	
+
 	@Test
 	public void numberOfMentions() {
-		String tweetMsg = "@franky @rohan @naveen goes to #hollywood. See http://cnn.com";
-		TweetParser parser = new TweetParser(tweetMsg);
-		assertEquals(parser.numberOfMentions(), 3);
+		String tweetMsg1 = "@franky goes to #hollywood. See http://cnn.com";
+		String tweetMsg2 = "@franky @rohan @david goes to #hollywood. See http://cnn.com";
+		TweetParser parser1 = new TweetParser(tweetMsg1);
+		TweetParser parser2 = new TweetParser(tweetMsg2);
+		assertEquals(parser1.numberOfMentions(), 1);
+		assertEquals(parser2.numberOfMentions(), 3);
 	}
-	
+
 	@Test
 	public void isTopicTest() {
 		String tweetMsg = "@franky goes to #hollywood. See http://cnn.com";
@@ -32,7 +33,17 @@ public class TweetParserTest {
 		assertEquals(parser.isTopic("hollywood"), true);
 		assertEquals(parser.isTopic("bollywood"), false);
 	}
-	
+
+	@Test
+	public void numberOfTopicsTest() {
+		String tweetMsg1 = "@franky goes to #hollywood. See http://cnn.com";
+		String tweetMsg2 = "@rohan goes to #hollywood #universalstudios and #staplescenter. See http://cnn.com";
+		TweetParser parser1 = new TweetParser(tweetMsg1);
+		TweetParser parser2 = new TweetParser(tweetMsg2);
+		assertEquals(parser1.numberOfTopics(), 1);
+		assertEquals(parser2.numberOfTopics(), 3);
+	}
+
 	@Test
 	public void isReferencedURLTest() {
 		String tweetMsg = "@franky goes to #hollywood. See http://cnn.com";

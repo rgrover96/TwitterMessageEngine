@@ -52,4 +52,15 @@ public class TweetParserTest {
 		assertEquals(parser.isReferencedURL("http://www.cnn.com"), true);
 		assertEquals(parser.isReferencedURL("http://nba.com"), false);
 	}
+	
+	@Test
+	public void numberOfReferencedURLTest() {
+		String tweetMsg1 = "@franky goes to #hollywood. See http://cnn.com";
+		String tweetMsg2 = "@franky goes to #hollywood. See http://cnn.com and http://www.abcnews.com";
+		TweetParser parser1 = new TweetParser(tweetMsg1);
+		TweetParser parser2 = new TweetParser(tweetMsg2);
+		assertEquals(parser1.numberOfReferencedURL(), 1);
+		assertEquals(parser2.numberOfReferencedURL(), 2);
+	}
+	
 }

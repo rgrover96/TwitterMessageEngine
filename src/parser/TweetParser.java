@@ -65,4 +65,15 @@ public class TweetParser {
 		}
 		return false;
 	}
+	
+	public int numberOfReferencedURL() {
+		int count = 0;
+		String[] words = tweetMessage.split(" ");
+		for (String word : words) {
+			if (URLUtil.isURLValid(word)) {
+				count++;
+			}
+		}
+		return count;
+	}
 }
